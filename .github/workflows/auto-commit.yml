@@ -1,0 +1,31 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    - cron: '30 3 * * *'
+    - cron: '30 15 * * *'
+  workflow_dispatch:
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update timestamp
+        run: |
+          echo "Last auto-updated: $(date '+%Y-%m-%d %H:%M:%S UTC')" > .last-updated.txt
+
+      - name: Commit and push
+        run: |
+          git add .last-updated.txt
+          git commit -m "chore: daily auto-update [$(date '+%Y-%m-%d %H:%M UTC')]"
+          git push
