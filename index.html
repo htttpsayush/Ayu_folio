@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush OS | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="flex flex-col items-center">
+
+    <!-- Taskbar -->
+    <header class="taskbar fixed top-0 w-full z-[1100] flex justify-between items-center px-6 text-white">
+        <div class="flex items-center gap-1">
+            <img src="Apple-removebg-preview.png" class="h-6 w-6 mx-2 object-contain" alt="Logo">
+            <span class="menu-item font-bold" onclick="openWin('win-about')">Ayush's Portfolio</span>
+            <span class="menu-item" onclick="openWin('win-resume')">Resume</span>
+        </div>
+        <div class="flex items-center gap-8">
+            <span id="theme-toggle" class="text-lg">🌙</span>
+            <span id="live-clock" class="font-medium tracking-wide"></span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="hero-trigger" class="mt-[38vh] text-center w-full select-none">
+        <div class="py-2"><p id="sub-text" class="text-lg tracking-[0.3em] font-medium mb-2">Hey, I'm Ayush! welcome to my</p></div>
+        <div class="flex justify-center items-center py-2"><h1 id="hero-title" class="mochi-font text-6xl md:text-[8rem] leading-none">portfolio.</h1></div>
+    </main>
+
+    <!-- About Window -->
+    <div id="win-about" class="window">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-about')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">about-me.md</div>
+        </div>
+        <div class="p-8 overflow-y-auto h-[calc(100%-38px)]">
+            <h2 class="text-xl font-bold mb-4 highlight-blue">📌 About Me</h2>
+            <div class="space-y-4 opacity-90 text-sm md:text-base leading-relaxed">
+                <p>Hey there! 👋 I'm <span class="highlight-green font-bold text-lg">Ayush Singh</span> — a passionate B.Tech 3rd-year student specializing in Computer Science.</p>
+                <p class="font-bold highlight-blue mt-4 uppercase text-xs tracking-widest">💡 What I Do:</p>
+                <ul class="list-none space-y-2 mt-2 ml-4">
+                    <li>💻 Code in <span class="font-mono font-bold">Python, Java, JavaScript, and C++</span></li>
+                    <li>🚀 Exploring Machine Learning & AI Concepts</li>
+                    <li>🌱 Active contributor to Open Source projects</li>
+                </ul>
+                <p class="font-bold highlight-blue mt-4 uppercase text-xs tracking-widest">🏆 Beyond Tech:</p>
+                <p class="ml-4 italic">🏃‍♂️ Sports Enthusiast — I believe in balancing a sharp mind with an active body!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Window -->
+    <div id="win-projects" class="window">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-projects')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">Projects Explorer</div>
+        </div>
+        <div class="folder-grid">
+            <div class="folder-item" onclick="openWin('win-p1')"><img src="download__1_-removebg-preview.png" class="w-16"><span class="text-xs font-bold text-center">AI Push-Up Counter</span></div>
+            <div class="folder-item" onclick="openWin('win-p2')"><img src="download__1_-removebg-preview.png" class="w-16"><span class="text-xs font-bold text-center">KeyForge Manager</span></div>
+            <div class="folder-item" onclick="openWin('win-p3')"><img src="download__1_-removebg-preview.png" class="w-16"><span class="text-xs font-bold text-center">3D Storytelling</span></div>
+        </div>
+    </div>
+
+    <!-- Project 1 -->
+    <div id="win-p1" class="window !h-auto !min-h-[380px]">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-p1')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">Project Details</div>
+        </div>
+        <div class="p-8 text-sm">
+            <h3 class="text-xl font-bold highlight-green mb-2">AI Push-Up Counter</h3>
+            <p class="opacity-50 text-xs mb-4 font-mono">Tech: Python, MediaPipe, OpenCV, NumPy</p>
+            <div class="space-y-3 leading-relaxed opacity-90 mb-8">
+                <p>Developed an AI-powered fitness application that uses real-time human pose estimation to track and count repetitions.</p>
+                <ul class="list-disc ml-5 space-y-2">
+                    <li>Used MediaPipe Pose Tracking to identify body landmarks and compute joint angles.</li>
+                    <li>Implemented state logic to detect movement patterns for automatic rep counting.</li>
+                </ul>
+            </div>
+            <a href="https://htttpsayush.github.io/PUSHUP-COUNTER-/" target="_blank" class="demo-btn">
+                Demo <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div id="win-p2" class="window !h-auto !min-h-[350px]">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-p2')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">Project Details</div>
+        </div>
+        <div class="p-8 text-sm">
+            <h3 class="text-xl font-bold highlight-green mb-2">KeyForge Password Manager</h3>
+            <p class="opacity-50 text-xs mb-4 font-mono">Tech: Python, CustomTkinter, Fernet Encryption, Bcrypt</p>
+            <div class="space-y-3 leading-relaxed opacity-90">
+                <p>Built a secure desktop vault for managing sensitive credentials with high encryption standards.</p>
+                <ul class="list-disc ml-5 space-y-2">
+                    <li>Integrated Fernet symmetric encryption and Bcrypt hashing for master security.</li>
+                    <li>Designed a responsive dark-mode GUI for native desktop experience.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div id="win-p3" class="window !h-auto !min-h-[380px]">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-p3')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">Project Details</div>
+        </div>
+        <div class="p-8 text-sm">
+            <h3 class="text-xl font-bold highlight-green mb-2">3D Storytelling Website</h3>
+            <p class="opacity-50 text-xs mb-4 font-mono">Tech: HTML5, TailwindCSS, JavaScript, GSAP</p>
+            <div class="space-y-3 leading-relaxed opacity-90 mb-8">
+                <p>Created an immersive scroll-driven web experience using modern animation libraries.</p>
+                <ul class="list-disc ml-5 space-y-2">
+                    <li>Leveraged GSAP for high-performance scroll-triggered parallax effects.</li>
+                    <li>Implemented layered motion to provide a deep visual storytelling feel.</li>
+                </ul>
+            </div>
+            <a href="https://htttpsayush.github.io/3D-Animated-website/" target="_blank" class="demo-btn">
+                Demo <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact Window -->
+    <div id="win-contact" class="window">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-contact')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">Contact Me</div>
+        </div>
+        <div class="p-8 flex flex-col items-center h-[calc(100%-38px)] text-center">
+            <h2 class="text-3xl font-black mt-8 mb-2">Let's Connect</h2>
+            <p class="text-sm opacity-80 mb-10 px-4 leading-relaxed italic text-white">Got an idea? A bug to squash? Or just wanna talk tech? I'm in.</p>
+            <div class="grid grid-cols-1 gap-3 w-full max-w-sm">
+                <a href="mailto:ac.ayush2007@gmail.com" class="contact-card flex items-center gap-4 px-5 py-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-blue-400"></i>
+                    <span class="font-bold text-sm">ac.ayush2007@gmail.com</span>
+                </a>
+                <div class="flex gap-3">
+                    <a href="https://github.com/htttpsayush" target="_blank" class="contact-card flex-1 flex items-center justify-center gap-2 py-3">
+                        <i data-lucide="github" class="w-5 h-5 text-white"></i><span class="font-bold text-sm">GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/ayush-kumar-singh-942990305" target="_blank" class="contact-card flex-1 flex items-center justify-center gap-2 py-3">
+                        <i data-lucide="linkedin" class="w-5 h-5 text-blue-500"></i><span class="font-bold text-sm">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminal / Skills Window -->
+    <div id="win-terminal" class="window !bg-[#0d0d0d]">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-terminal')"></div>
+            <div class="flex-1 text-center text-xs font-bold text-gray-400">tech-stack</div>
+        </div>
+        <div class="terminal-body h-[calc(100%-38px)] overflow-y-auto">
+            <p class="mb-2">ayush@portfolio ~ % show skills</p>
+            <p class="text-white/20 mb-4 font-bold tracking-tighter">------------------------------------------------------------</p>
+            <div class="flex justify-center w-full">
+                <div class="text-sm font-mono w-full max-w-md px-4">
+                    <div class="flex mb-4">
+                        <div class="w-1/3 text-blue-400 font-bold underline uppercase tracking-widest text-[11px]">Categories</div>
+                        <div class="w-2/3 text-blue-400 font-bold underline uppercase tracking-widest text-[11px] ml-4">Technologies</div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex"><div class="w-1/3 highlight-green">✓ Languages</div><div class="w-2/3 opacity-90 ml-4">: Java, Python, JS, HTML/CSS, SQL</div></div>
+                        <div class="flex"><div class="w-1/3 highlight-green">✓ Frameworks</div><div class="w-2/3 opacity-90 ml-4">: Flask, Django</div></div>
+                        <div class="flex"><div class="w-1/3 highlight-green">✓ Dev Tools</div><div class="w-2/3 opacity-90 ml-4">: Git, GitHub, Docker, VS Code</div></div>
+                        <div class="flex"><div class="w-1/3 highlight-green">✓ Others</div><div class="w-2/3 opacity-90 ml-4">: DSA, OOP's, OS, ML</div></div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-white/20 mt-6 mb-4 font-bold tracking-tighter">------------------------------------------------------------</p>
+            <p class="highlight-green text-xs">✓ Skills fetched successfully.</p>
+        </div>
+    </div>
+
+    <!-- Resume Window -->
+    <div id="win-resume" class="window !w-[800px] !h-[600px]">
+        <div class="window-header handle">
+            <div class="dot bg-red-500" onclick="closeWin('win-resume')"></div>
+            <span class="ml-4 text-xs font-bold text-white">Ayush_Resume.pdf</span>
+            <div class="flex-1"></div>
+            <a href="Ayush_Resume.pdf" download="Ayush_Resume.pdf" class="download-btn mr-4">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
+            </a>
+        </div>
+        <iframe src="Ayush_Resume.pdf#toolbar=0" class="w-full h-full border-none bg-white"></iframe>
+    </div>
+
+    <!-- Dock -->
+    <nav class="fixed bottom-6 z-[1000] flex justify-center w-full">
+        <div class="glass-dock px-3 shadow-2xl" id="dock">
+            <div class="dock-item" onclick="openWin('win-about')"><span class="dock-label">About Me</span><img src="download-removebg-preview.png" class="dock-icon"></div>
+            <div class="dock-item" onclick="openWin('win-projects')"><span class="dock-label">Projects</span><img src="download__1_-removebg-preview.png" class="dock-icon"></div>
+            <div class="dock-item"><span class="dock-label">Me</span><img src="PHOTOS__macOS_Big_Sur_Icons_Pack_-removebg-preview.png" class="dock-icon"></div>
+            <div class="dock-item" onclick="openWin('win-contact')"><span class="dock-label">Contact</span><img src="High_Res_iPhone___iPad_icons-removebg-preview.png" class="dock-icon"></div>
+            <div class="dock-item" onclick="openWin('win-terminal')"><span class="dock-label">Skills</span><img src="Terminal_free_icons_designed_by_HideMaru-removebg-preview.png" class="dock-icon"></div>
+            <div class="dock-item" onclick="smartClose()"><span class="dock-label">Clear Desktop</span><img src="Cat Meme Format.jpg" class="dock-icon"></div>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
