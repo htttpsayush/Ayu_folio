@@ -1,6 +1,6 @@
 # 🖥️ Ayush OS — Interactive Portfolio
 
-> A macOS-inspired interactive portfolio built with HTML, CSS, and JavaScript.  
+> A macOS-inspired interactive portfolio built with HTML, CSS, and JavaScript.   
 > Live at 👉 **[ayush-folio.vercel.app](https://ayush-folio.vercel.app)**
 
 ---
