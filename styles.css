@@ -1,25 +1,25 @@
 /* ============================================================
    styles.css — Ayush OS Portfolio
    
-   TABLE OF CONTENTS:
-   1. Fonts
-   2. CSS Variables (Themes)
-   3. Global / Reset
-   4. Typography
-   5. Taskbar
-   6. Windows
-   7. Terminal / Skills Window
-   8. Contact Cards
-   9. Buttons (Demo & Download)
+   INDEX:
+   1.  Fonts
+   2.  CSS Variables (Dark / Light Theme)
+   3.  Global Reset
+   4.  Typography
+   5.  Taskbar
+   6.  Windows
+   7.  Terminal / Skills Window
+   8.  Contact Cards
+   9.  Buttons
    10. Folder / Projects Grid
    11. Dock
+   12. Mobile Responsive (max-width: 768px)
+   13. Very Small Screens (max-width: 400px)
    ============================================================ */
 
 
 /* ============================================================
    1. FONTS
-   Load the custom 'MochiBoom' font used for the hero title.
-   The file 'Mochi Boom DEMO.ttf' must be in the same folder.
    ============================================================ */
 @font-face {
     font-family: 'MochiBoom';
@@ -28,129 +28,102 @@
 
 
 /* ============================================================
-   2. CSS VARIABLES (THEMES)
-   
-   We define color variables on :root (dark mode by default).
-   When the user clicks the theme toggle, JS adds .light-mode
-   to <body>, which overrides these variables automatically.
+   2. CSS VARIABLES
+   Dark mode is default. Light mode toggled via JS on <body>
    ============================================================ */
 :root {
-    --text-color: #ffffff;   /* Default text: white */
-    --window-bg:  #121212;   /* Window background: dark gray */
-    --header-bg:  #1e1e1e;   /* Window header bar: slightly lighter */
+    --text-color: #ffffff;
+    --window-bg:  #121212;
+    --header-bg:  #1e1e1e;
 }
-
-/* Light mode overrides — toggled via JS on <body> */
 .light-mode {
-    --text-color: #000000;   /* Text: black */
-    --window-bg:  #ffffff;   /* Window background: white */
-    --header-bg:  #f3f3f3;   /* Window header: light gray */
+    --text-color: #000000;
+    --window-bg:  #ffffff;
+    --header-bg:  #f3f3f3;
 }
 
 
 /* ============================================================
-   3. GLOBAL / RESET
+   3. GLOBAL RESET
    ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Make everything use the default arrow cursor by default... */
-* {
-    cursor: default !important;
-}
+/* Default arrow cursor everywhere */
+* { cursor: default !important; }
 
-/* ...but show a pointer cursor on interactive elements */
-a,
-button,
-.dot,
-.menu-item,
-.folder-item,
-.dock-icon,
-.download-btn {
+/* Pointer cursor on interactive elements */
+a, button, .dot, .menu-item, .folder-item, .dock-icon, .download-btn {
     cursor: pointer !important;
 }
 
-/* Body: full-screen, no scroll, macOS wallpaper as background.
-   perspective enables 3D transforms for the hero text animation. */
+/* Body — dark wallpaper by default, no scroll */
 body {
-    background: #000 url('macos-tahoe-26-5120x2880-22674.jpg') no-repeat center center / cover;
-    font-family: -apple-system, sans-serif;
+    background: #000 url('wallpaper-dark.png') no-repeat center center / cover;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     height: 100vh;
-    overflow: hidden;      /* No page scrolling — everything is windowed */
+    overflow: hidden;
     color: var(--text-color);
-    perspective: 1200px;   /* Enables 3D depth for GSAP char animations */
+    perspective: 1200px; /* Enables 3D depth for hero animation */
+    transition: background-image 0.5s ease;
 }
 
 
 /* ============================================================
    4. TYPOGRAPHY
    ============================================================ */
-
-/* Hero title font — uppercase blocky style */
 .mochi-font {
     font-family: 'MochiBoom', sans-serif;
     text-transform: uppercase;
 }
+.highlight-green { color: #34d399; }
+.highlight-blue  { color: #60a5fa; }
 
-/* Color utility classes used throughout the portfolio */
-.highlight-green { color: #34d399; }  /* Accent green — used in terminal, project titles */
-.highlight-blue  { color: #60a5fa; }  /* Accent blue — used in headings, links */
-
-/* Each character in the hero text is wrapped in a .char span by JS.
-   This allows GSAP to animate each letter individually on mouse move. */
+/* Each hero character — split by JS for magnetic animation */
 .char {
     display: inline-block;
-    will-change: transform;   /* Hint to browser for GPU acceleration */
-    pointer-events: none;     /* Prevent hover events on individual characters */
+    will-change: transform;
+    pointer-events: none;
     color: inherit;
 }
 
 
 /* ============================================================
    5. TASKBAR
-   Fixed top bar styled like a macOS menu bar.
-   Uses backdrop-filter blur for the frosted glass effect.
    ============================================================ */
 .taskbar {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(25px);   /* Frosted glass effect */
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     height: 44px;
-    font-size: 15px;
+    font-size: 14px;
     border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
 }
-
-/* Clickable nav items in the taskbar (e.g. "Resume", "Portfolio") */
 .menu-item {
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 6px;
     transition: background 0.2s;
     font-weight: 500;
 }
-
-.menu-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
+.menu-item:hover { background: rgba(255, 255, 255, 0.2); }
 
 
 /* ============================================================
    6. WINDOWS
-   Each popup panel (About, Projects, Contact, etc.) is a .window.
-   They are hidden by default and shown via JS with GSAP animations.
+   Hidden by default, shown + animated via openWin() in JS
    ============================================================ */
 .window {
-    position: absolute;          /* Positioned freely on the desktop */
+    position: absolute;
     width: 620px;
     height: 480px;
     background: var(--window-bg);
     border-radius: 12px;
-    display: none;               /* Hidden until openWin() is called */
-    opacity: 0;                  /* Start transparent for fade-in animation */
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+    display: none;
+    opacity: 0;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     z-index: 50;
 }
-
-/* The draggable top bar of each window.
-   cursor: move tells the user they can drag it. */
 .window-header {
     height: 38px;
     background: var(--header-bg);
@@ -158,92 +131,81 @@ body {
     display: flex;
     align-items: center;
     padding: 0 15px;
+    flex-shrink: 0;
 }
-
-/* The red close button (macOS traffic light style) */
 .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     margin-right: 8px;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
 }
+.dot:hover { opacity: 0.7; }
 
 
 /* ============================================================
    7. TERMINAL / SKILLS WINDOW
-   Monospace font and light text give it a real terminal feel.
    ============================================================ */
 .terminal-body {
     padding: 25px 35px;
     font-family: 'Courier New', monospace;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.7;
     color: #e0e0e0;
 }
 
 
 /* ============================================================
    8. CONTACT CARDS
-   Glassmorphism-style cards for email, GitHub, LinkedIn links.
-   Hover lifts the card up and highlights the border in blue.
    ============================================================ */
 .contact-card {
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
 }
-
 .contact-card:hover {
     background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-3px);   /* Lift up on hover */
-    border-color: #60a5fa;         /* Blue border highlight */
+    transform: translateY(-3px);
+    border-color: #60a5fa;
 }
 
 
 /* ============================================================
    9. BUTTONS
-   
-   .demo-btn    → Green pill button for project demo links
-   .download-btn → Small dark button for resume download
-   Both share base styles, then .download-btn overrides some.
+   .demo-btn   → green pill (project demo links)
+   .download-btn → small dark (resume download)
    ============================================================ */
-
-/* Shared base styles for both buttons */
-.demo-btn,
-.download-btn {
+.demo-btn, .download-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 8px 20px;
-    background: #34d399;           /* Green by default */
+    background: #34d399;
     color: #000 !important;
     border-radius: 20px;
     font-weight: bold;
     text-decoration: none !important;
-    transition: 0.3s;
+    transition: all 0.3s;
     position: relative;
     z-index: 100;
 }
-
-/* Both buttons turn blue and scale up on hover */
-.demo-btn:hover,
-.download-btn:hover {
+.demo-btn:hover, .download-btn:hover {
     background: #60a5fa;
     transform: scale(1.05);
 }
-
-/* --- Download button overrides (smaller, darker style) --- */
+/* Download button override */
 .download-btn {
     padding: 4px 12px;
     font-size: 12px;
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.1);   /* Subtle transparent bg */
+    background: rgba(255, 255, 255, 0.1);
     color: white !important;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
-/* Download button hover: turn green (opposite of demo-btn) */
 .download-btn:hover {
     background: #34d399;
     color: #000 !important;
@@ -253,8 +215,6 @@ body {
 
 /* ============================================================
    10. FOLDER / PROJECTS GRID
-   3-column icon grid inside the Projects Explorer window.
-   Each folder icon opens a project detail window on click.
    ============================================================ */
 .folder-grid {
     display: grid;
@@ -262,8 +222,6 @@ body {
     gap: 20px;
     padding: 40px;
 }
-
-/* Individual folder item — icon + label stacked vertically */
 .folder-item {
     display: flex;
     flex-direction: column;
@@ -273,8 +231,6 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
-
-/* Highlight and scale up on hover */
 .folder-item:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: scale(1.05);
@@ -283,60 +239,110 @@ body {
 
 /* ============================================================
    11. DOCK
-   Fixed bottom bar with app icons — mimics the macOS Dock.
-   Uses glassmorphism (blur + transparent bg).
-   Icon magnification on hover is handled by JS.
    ============================================================ */
-
-/* The dock container — frosted glass bar */
 .glass-dock {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 10px;
     display: flex;
-    align-items: flex-end;   /* Icons sit on the "floor" of the dock */
+    align-items: flex-end;
     gap: 12px;
     height: 70px;
     border-radius: 24px;
 }
-
-/* Wrapper for each icon + its hover label */
 .dock-item {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-/* The icon image — size is dynamically changed by JS for magnification */
 .dock-icon {
     width: 48px;
     height: 48px;
     object-fit: contain;
-    transform-origin: bottom;           /* Scale grows upward from the bottom */
+    transform-origin: bottom;
     transition: width 0.1s, height 0.1s;
 }
-
-/* Tooltip label that floats above the icon on hover */
 .dock-label {
     position: absolute;
-    bottom: 80px;                        /* Sits above the icon */
-    background: rgba(0, 0, 0, 0.8);
+    bottom: 80px;
+    background: rgba(0, 0, 0, 0.85);
     color: white;
     padding: 4px 12px;
     border-radius: 8px;
     font-size: 12px;
     white-space: nowrap;
-    opacity: 0;                          /* Hidden by default */
+    opacity: 0;
     pointer-events: none;
     transition: all 0.2s ease;
-    transform: translateY(10px);         /* Starts slightly lower */
+    transform: translateY(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+.dock-item:hover .dock-label { opacity: 1; transform: translateY(0); }
 
-/* On hover: fade in and slide the label up into position */
-.dock-item:hover .dock-label {
-    opacity: 1;
-    transform: translateY(0);
+
+/* ============================================================
+   12. MOBILE RESPONSIVE — max-width: 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+    /* Disable 3D perspective — too slow on mobile */
+    body { perspective: none; }
+
+    /* Taskbar */
+    .taskbar { height: 40px; font-size: 11px; padding: 0 8px; }
+    .menu-item { padding: 3px 6px; font-size: 11px; }
+    #live-clock { font-size: 10px; letter-spacing: 0; }
+    #theme-toggle { font-size: 14px; }
+
+    /* Hero */
+    #hero-trigger { margin-top: 28vh; }
+    #sub-text { font-size: 10px !important; letter-spacing: 0.1em; }
+    #hero-title { font-size: 2.8rem !important; }
+
+    /* Windows — full screen on mobile */
+    .window {
+        width: 94vw !important;
+        height: 78vh !important;
+        min-height: unset !important;
+        left: 3vw !important;
+        top: 11vh !important;
+        border-radius: 14px;
+        overflow-y: auto;
+    }
+
+    /* Folder grid — 2 columns */
+    .folder-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 20px;
+    }
+    .folder-item img { width: 44px !important; }
+    .folder-item { padding: 10px; }
+
+    /* Terminal */
+    .terminal-body { padding: 15px; font-size: 11px; }
+
+    /* Buttons */
+    .demo-btn { padding: 7px 14px; font-size: 12px; }
+
+    /* Dock — touch friendly, smaller icons */
+    .glass-dock { gap: 8px; height: 58px; padding: 8px 10px; border-radius: 18px; }
+    .dock-icon { width: 36px !important; height: 36px !important; }
+    .dock-label { font-size: 10px; bottom: 60px; padding: 3px 8px; }
+}
+
+
+/* ============================================================
+   13. VERY SMALL SCREENS — max-width: 400px
+   ============================================================ */
+@media (max-width: 400px) {
+    #hero-title  { font-size: 2rem !important; }
+    #sub-text    { font-size: 9px !important; }
+    .dock-icon   { width: 30px !important; height: 30px !important; }
+    .glass-dock  { gap: 5px; padding: 6px 8px; height: 50px; }
+    .window      { height: 82vh !important; width: 96vw !important; }
+    .menu-item   { padding: 2px 4px; font-size: 10px; }
 }
