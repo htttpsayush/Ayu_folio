@@ -58,7 +58,7 @@ a, button, .dot, .menu-item, .folder-item, .dock-icon, .download-btn {
 
 /* Body — dark wallpaper by default, no scroll */
 body {
-    background: #000 url('wallpaper-dark.png') no-repeat center center / cover;
+    background: #000 url('wallpaper-dark.jpg') no-repeat center center / cover;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     height: 100vh;
     overflow: hidden;
