@@ -160,8 +160,8 @@ document.getElementById('theme-toggle').onclick = () => {
 
     // Update wallpaper
     document.body.style.backgroundImage = isLight
-        ? "url('wallpaper-light.png')"
-        : "url('wallpaper-dark.png')";
+        ? "url('wallpaper-light.jpg')"
+        : "url('wallpaper-dark.jpg')";
 };
 
 
