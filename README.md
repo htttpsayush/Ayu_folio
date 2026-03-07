@@ -17,7 +17,7 @@
 - 🌙 **Dark / Light Mode** — Toggle between themes with one click
 - 🕐 **Live Clock** — Real-time date and time in the taskbar
 - 📄 **Resume Viewer** — Embedded PDF viewer with download option
-- 📱 **Smooth Animations** — Powered by GSAP for all transitions
+- 📱 **Smooth Animations** — Powered by GSAP for all transitions 
 
 ---
 
