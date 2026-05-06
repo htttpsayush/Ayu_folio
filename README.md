@@ -11,7 +11,7 @@
 
 ### ✨ Key Features
 
-- 🪟 **Draggable Windows** — Every section (About, Projects, Skills, Contact) opens as a movable popup window   
+- 🪟 **Draggable Windows** — Every section (About, Projects, Skills, Contact) opens as a movable popup window    
 - 🌊 **Magnetic Hero Text** — Letters in the title repel away from the mouse cursor in 3D space
 - 🚀 **macOS-style Dock** — Bottom dock with icon magnification on hover
 - 🌙 **Dark / Light Mode** — Toggle between themes with one click
